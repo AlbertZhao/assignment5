@@ -10,12 +10,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Demo class
- *
- * @author 1547418
- * @date 2019/08/12
- */
 @Service
 public class UserServiceImpl implements UserService {
 

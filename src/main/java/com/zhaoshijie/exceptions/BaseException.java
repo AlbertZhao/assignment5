@@ -2,12 +2,6 @@ package com.zhaoshijie.exceptions;
 
 import com.zhaoshijie.enums.ServiceErrorCodes;
 
-/**
- * Demo class
- *
- * @author 1547418
- * @date 2019/08/12
- */
 public class BaseException extends RuntimeException {
     private ServiceErrorCodes errorCode;
 
