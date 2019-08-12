@@ -1,4 +1,4 @@
-package com.zhaoshijie.domain;
+package com.zhaoshijie.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
