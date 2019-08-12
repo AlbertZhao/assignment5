@@ -7,6 +7,9 @@ package com.zhaoshijie.exceptions;
  * @date 2019/08/12
  */
 public class JsonDeserializationException extends RuntimeException{
+
+    private static final long serialVersionUID = 5296846326187662457L;
+
     private transient Object target;
 
     private String jsonString;

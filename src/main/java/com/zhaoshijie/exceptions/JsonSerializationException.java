@@ -8,6 +8,7 @@ package com.zhaoshijie.exceptions;
  */
 public class JsonSerializationException extends RuntimeException {
 
+    private static final long serialVersionUID = -3304215534403454263L;
     private transient Object target;
 
     public JsonSerializationException(Throwable cause) {
