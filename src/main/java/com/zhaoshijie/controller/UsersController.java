@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersController {
 
 
+    @RequestMapping(value = "/register")
     public ResponseEntity<?> register(@RequestBody UserDto userDto) {
 
         return new ResponseEntity<>(HttpStatus.OK);

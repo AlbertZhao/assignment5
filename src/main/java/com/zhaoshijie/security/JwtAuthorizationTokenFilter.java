@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthorizationTokenFilter extends AbstractAuthenticationProcessingFilter {
-    protected JwtAuthorizationTokenFilter(String defaultFilterProcessesUrl) {
+    public JwtAuthorizationTokenFilter(String defaultFilterProcessesUrl) {
         super(defaultFilterProcessesUrl);
     }
 
-    protected JwtAuthorizationTokenFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
+    public JwtAuthorizationTokenFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
         super(requiresAuthenticationRequestMatcher);
     }
 
