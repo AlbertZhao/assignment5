@@ -2,6 +2,7 @@ package com.zhaoshijie.config;
 
 import com.zhaoshijie.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,6 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private LoginAuthenticationSuccessHandler successHandler;
     @Autowired private LoginAuthenticationFailureHandler failureHandler;
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     protected LoginAuthenticationFilter buildLoginAuthenticationFilter(String defaultProcessUrl) {
         LoginAuthenticationFilter loginAuthenticationFilter = new LoginAuthenticationFilter(defaultProcessUrl, successHandler, failureHandler);
