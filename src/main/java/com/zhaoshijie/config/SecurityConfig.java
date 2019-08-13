@@ -1,9 +1,6 @@
 package com.zhaoshijie.config;
 
-import com.zhaoshijie.security.JwtAuthenticationProvider;
-import com.zhaoshijie.security.JwtAuthorizationTokenFilter;
-import com.zhaoshijie.security.RestAuthenticationEntryPoint;
-import com.zhaoshijie.security.SkipPathRequestMatcher;
+import com.zhaoshijie.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtAuthenticationProvider authenticationProvider;
+    private JwtAuthenticationProvider jwtAuthenticationProvider;
+
+    @Autowired
+    private LoginAuthticationProvider loginAuthticationProvider;
+
+    @Autowired private LoginAuthenticationSuccessHandler successHandler;
+    @Autowired private LoginAuthenticationFailureHandler failureHandler;
+
+    protected LoginAuthenticationFilter buildLoginAuthenticationFilter(String defaultProcessUrl) {
+        LoginAuthenticationFilter loginAuthenticationFilter = new LoginAuthenticationFilter(defaultProcessUrl, successHandler, failureHandler);
+        loginAuthenticationFilter.setAuthenticationManager(authenticationManager);
+        return loginAuthenticationFilter;
+    }
 
     protected JwtAuthorizationTokenFilter buildJwtAuthorizationTokenFilter(List<String> pathsToSkip, String pattern) {
         SkipPathRequestMatcher requestMatcher = new SkipPathRequestMatcher(pathsToSkip, pattern);
@@ -58,11 +67,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/**")
                     .permitAll()
                 .and()
+                    .addFilterBefore(buildLoginAuthenticationFilter(USER_LOGIN_URL), UsernamePasswordAuthenticationFilter.class)
                     .addFilterBefore(buildJwtAuthorizationTokenFilter(permitAllEndpointList, "/assignment/**"), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider);
+        auth.authenticationProvider(loginAuthticationProvider);
+        auth.authenticationProvider(jwtAuthenticationProvider);
     }
 }
