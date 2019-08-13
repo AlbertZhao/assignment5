@@ -5,6 +5,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.util.Assert;
  * @author Albert
  * @date 2019/08/13
  */
+@Component
 public class LoginAuthticationProvider implements AuthenticationProvider {
 
     @Override
